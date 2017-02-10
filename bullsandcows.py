@@ -25,7 +25,7 @@ def check_number(user_input, unique_number, attempts):
         print("Congratulation you win! It took you %s tries." % attempts)
         return False
     else:
-        print("bulls: %s, cows: %s" % (bulls, cows))
+        print("%s bulls, %s cows" % (bulls, cows))
         return True
 
 
@@ -65,7 +65,7 @@ def is_non_repeting(user_input):
 
 
 def process_user_input(unique_number, attempts):
-    user_input = input("Input Number:\n")
+    user_input = input(">>> ")
     if is_valid(user_input):
         return check_number(user_input, unique_number, attempts)
     else:
@@ -76,6 +76,10 @@ def process_user_input(unique_number, attempts):
             return True
 
 
+print("Hi there!")
+print("I've generated a random 4 digit number for you.")
+print("Let's play a bulls and cows game.")
+print("Enter a number")
 unique_number = generate_number()
 attempts = 1
 
