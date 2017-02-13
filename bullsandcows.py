@@ -4,6 +4,7 @@ from random import randint
 
 
 def generate_number():
+    """Generates and returns 4-digit secret number as list."""
     unique_number = []
     while len(unique_number) < 4:
         candidate = str(randint(1, 9))
@@ -13,6 +14,10 @@ def generate_number():
 
 
 def process_user_input(unique_number, attempts):
+    """Process input from user.
+    That is check if the input is valid number and then checks for bulls and
+    cows. Exits application on 'q' press.
+    """
     user_input = input(">>> ")
     if is_valid(user_input):
         return check_number(user_input, unique_number, attempts)
@@ -25,6 +30,7 @@ def process_user_input(unique_number, attempts):
 
 
 def is_valid(user_input):
+    """Checks if input is valid."""
     if is_number(user_input):
         if is_correct_length(user_input):
             if is_non_repeting(user_input):
@@ -41,6 +47,7 @@ def is_valid(user_input):
 
 
 def is_number(user_input):
+    """Returns True when input is integer."""
     try:
         int(user_input)
         return True
@@ -49,10 +56,12 @@ def is_number(user_input):
 
 
 def is_correct_length(user_input):
+    """Returns true when input has 4 digit."""
     return len(user_input) == 4
 
 
 def is_non_repeting(user_input):
+    """Returns True if number doesn't have repeating digits."""
     for index, char in enumerate(user_input):
         if char in user_input[:index]+user_input[index+1:]:
             return False
@@ -60,6 +69,7 @@ def is_non_repeting(user_input):
 
 
 def check_number(user_input, unique_number, attempts):
+    """Check how many digits is correct. When all are correct program ends."""
     bulls = 0
     cows = 0
     for index, digit in enumerate(user_input):
@@ -69,11 +79,28 @@ def check_number(user_input, unique_number, attempts):
             if digit in unique_number:
                 cows += 1
     if bulls == 4:
-        print("Congratulation you win! It took you %s tries." % attempts)
-        return False
+        return eval_victory(attempts)
     else:
         print("%s bulls, %s cows" % (bulls, cows))
         return True
+
+
+def eval_victory(num_of_tries):
+    """Evaluates success of player."""
+    result = ""
+    if num_of_tries < 4:
+        result = "amazing"
+    elif num_of_tries < 11:
+        result = "very good"
+    elif num_of_tries < 16:
+        result = "average"
+    elif num_of_tries < 21:
+        result = "not so good"
+    else:
+        result = "bad"
+    print("Correct, you've guessed the right number in %s guesses!" %
+          num_of_tries)
+    print("That's %s!" % result)
 
 
 print("Hi there!")
