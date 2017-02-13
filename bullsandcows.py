@@ -19,14 +19,14 @@ def process_user_input(unique_number, attempts):
     cows. Exits application on 'q' press.
     """
     user_input = input(">>> ")
-    if is_valid(user_input):
+
+    if user_input == 'q':
+        print("Exiting!")
+        return False
+    elif is_valid(user_input):
         return check_number(user_input, unique_number, attempts)
     else:
-        if user_input == 'q':
-            print("Exiting!")
-            return False
-        else:
-            return True
+        return True
 
 
 def is_valid(user_input):
